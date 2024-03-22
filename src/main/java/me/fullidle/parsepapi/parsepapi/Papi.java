@@ -29,6 +29,8 @@ public class Papi extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
+        long l = System.nanoTime();
+
         Stack<Integer> indices = new Stack<>();
         ArrayList<String> sub = new ArrayList<>();
         String result = params;
@@ -45,7 +47,7 @@ public class Papi extends PlaceholderExpansion {
                 int startIndex = indices.pop();
                 String odata = params.substring(startIndex, i + 1);
                 int level = indices.size();
-                if (level <= upLevel) {
+                if (level < upLevel||level == 0) {
                     String orData = odata;
                     for (String s : sub) {
                         odata = odata.replaceFirst(Pattern.quote(s), PlaceholderAPI.setPlaceholders(player, replacePapiSymbol(s)));
