@@ -29,8 +29,6 @@ public class Papi extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        long l = System.nanoTime();
-
         Stack<Integer> indices = new Stack<>();
         ArrayList<String> sub = new ArrayList<>();
         String result = params;
