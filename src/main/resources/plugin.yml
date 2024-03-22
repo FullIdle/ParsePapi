@@ -1,0 +1,5 @@
+name: ${rootProject.name}
+main: ${group}
+version: ${version}
+depend:
+  - PlaceholderAPI
