@@ -45,7 +45,7 @@ public class Papi extends PlaceholderExpansion {
                 int startIndex = indices.pop();
                 String odata = params.substring(startIndex, i + 1);
                 int level = indices.size();
-                if (level < upLevel||level == 0) {
+                if (level <= upLevel) {
                     String orData = odata;
                     for (String s : sub) {
                         odata = odata.replaceFirst(Pattern.quote(s), PlaceholderAPI.setPlaceholders(player, replacePapiSymbol(s)));
