@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 import static me.fullidle.parsepapi.parsepapi.Main.plugin;
 
 public class Papi extends PlaceholderExpansion {
+    public static char tail;
+    public static char head;
+
     @Override
     public String getIdentifier() {
         return plugin.getDescription().getName().toLowerCase();
@@ -36,16 +39,16 @@ public class Papi extends PlaceholderExpansion {
 
         for (int i = 0; i < params.length(); i++) {
             char c = params.charAt(i);
-            if (c == '{') {
+            if (c == head) {
                 indices.push(i);
-            } else if (c == '}') {
+            } else if (c == tail) {
                 if (indices.isEmpty()) {
                     continue;
                 }
                 int startIndex = indices.pop();
                 String odata = params.substring(startIndex, i + 1);
                 int level = indices.size();
-                if (level <= upLevel) {
+                if (level < upLevel||level == 0) {
                     String orData = odata;
                     for (String s : sub) {
                         odata = odata.replaceFirst(Pattern.quote(s), PlaceholderAPI.setPlaceholders(player, replacePapiSymbol(s)));
@@ -66,6 +69,6 @@ public class Papi extends PlaceholderExpansion {
     }
 
     public static String replacePapiSymbol(String str) {
-        return str.replace("{", "%").replace("}", "%");
+        return str.replace(head, '%').replace(tail, '%');
     }
 }
